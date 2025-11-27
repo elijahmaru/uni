@@ -42,6 +42,9 @@ int main(int argc, char *argv[]) {
         cout << "Введите X: ";
         cin >> x;
     } while ((x > 9) && (x < 0));
+    cout << "1) B: ";
+    int *b = firstTask(a, x);
+    outputArray(b, 10);
     int z;
     do {
         cout << "Введите Z: ";
@@ -52,23 +55,20 @@ int main(int argc, char *argv[]) {
         cout << "Введите M: ";
         cin >> m;
     } while ((9 - z + 1 - m > 0) && (m > 0));
+    cout << "2) C: ";
+    int *c = secondTask(a, z, m);
+    outputArray(c, 10);
     int k;
     cout << "Введите K: ";
     cin >> k;
+    cout << "3) A: ";
+    thirdTask(a, k);
+    outputArray(a, 10);
     int y;
     do {
         cout << "Введите Y: ";
         cin >> m;
     } while ((y >= -50) && (y <= 50));
-    cout << "1) B: ";
-    int *b = firstTask(a, x);
-    outputArray(b, 10);
-    cout << "2) C: ";
-    int *c = secondTask(a, z, m);
-    outputArray(c, 10);
-    cout << "3) A: ";
-    thirdTask(a, k);
-    outputArray(a, 10);
     cout << "4) ";
     pair<int *, int> fourthReturn = fourthTask(a, y);
     int fourthLength = fourthReturn.second;
