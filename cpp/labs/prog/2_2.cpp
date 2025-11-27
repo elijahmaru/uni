@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <cstring>
 #include <ctime>
 #include <iostream>
 using namespace std;
@@ -44,7 +45,8 @@ int main(int argc, char *argv[]) {
     } while ((x > 9) && (x < 0));
     cout << "1) B: ";
     int *b = firstTask(a, x);
-    outputArray(b, 10);
+    outputArray(b, 9);
+
     int z;
     do {
         cout << "Введите Z: ";
@@ -54,21 +56,23 @@ int main(int argc, char *argv[]) {
     do {
         cout << "Введите M: ";
         cin >> m;
-    } while ((9 - z + 1 - m > 0) && (m > 0));
+    } while ((9 - z + 1 - m <= 0) && (m <= 0));
     cout << "2) C: ";
     int *c = secondTask(a, z, m);
-    outputArray(c, 10);
+    outputArray(c, 10 + m);
+
     int k;
     cout << "Введите K: ";
     cin >> k;
     cout << "3) A: ";
     thirdTask(a, k);
     outputArray(a, 10);
+
     int y;
     do {
         cout << "Введите Y: ";
-        cin >> m;
-    } while ((y >= -50) && (y <= 50));
+        cin >> y;
+    } while ((y < -50) && (y > 50));
     cout << "4) ";
     pair<int *, int> fourthReturn = fourthTask(a, y);
     int fourthLength = fourthReturn.second;
@@ -80,7 +84,7 @@ int main(int argc, char *argv[]) {
 
 int *firstTask(int arr[], int index) {
     int *newArr = new int[9];
-    for (int i = 0, j = 0; i < 9; i++) {
+    for (int i = 0, j = 0; i < 10; i++) {
         if (i != index)
             newArr[j++] = arr[i];
     }
@@ -88,8 +92,16 @@ int *firstTask(int arr[], int index) {
 }
 
 int *secondTask(int arr[], int index, int amount) {
-    int *newArr = new int[amount];
-    memmove(newArr, &arr[index], amount * sizeof(int));
+    int *newArr = new int[10 + amount];
+    memmove(newArr, arr, 10 * sizeof(int));
+    memmove(newArr + index + amount, arr + index, (10 - index) * sizeof(int));
+    cout << "inserting" << endl;
+    int insertedVal;
+    for (int i = 0; i < amount; i++) {
+        cout << "Введите элемент " << i + 1 << ": ";
+        cin >> insertedVal;
+        newArr[index + i] = insertedVal;
+    }
     return newArr;
 }
 
@@ -107,7 +119,7 @@ pair<int *, int> fourthTask(int arr[], int number) {
     int *res = new int[1];
     for (int i = 0; i < 10; i++) {
         if (arr[i] == number) {
-            appendArray(res, length, number);
+            appendArray(res, length, i);
         }
     }
     return {res, length};
