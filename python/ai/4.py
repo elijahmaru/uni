@@ -127,8 +127,6 @@ def minimax(board, depth, isMaxTurn, maxDepth):
     if depth == maxDepth:
         return heuristic(board), None
     validMoves = get_valid_moves(board)
-    print_board(board)
-    print(validMoves)
     if isMaxTurn:
         worstValue = -math.inf
         bestMove = None
@@ -136,7 +134,6 @@ def minimax(board, depth, isMaxTurn, maxDepth):
             newBoard = deepcopy(board)
             newBoard[r][c] = HUMAN
             value, move = minimax(newBoard, depth + 1, False, maxDepth)
-            print(value, move)
             if value > worstValue:
                 worstValue = value
                 bestMove = (r, c)
@@ -146,9 +143,8 @@ def minimax(board, depth, isMaxTurn, maxDepth):
         bestMove = None
         for r, c in validMoves:
             newBoard = deepcopy(board)
-            newBoard[r][c] = HUMAN
-            value, move = minimax(newBoard, depth + 1, False, maxDepth)
-            print(value, move)
+            newBoard[r][c] = AI
+            value, move = minimax(newBoard, depth + 1, True, maxDepth)
             if value < worstValue:
                 worstValue = value
                 bestMove = (r, c)
@@ -158,12 +154,13 @@ def minimax(board, depth, isMaxTurn, maxDepth):
 # ХОД ИИ (ToDo)
 
 
-def ai_move(board, maxDepth=4):
+def ai_move(board, maxDepth):
     # Делает ход ИИ, возвращает обновлённое поле.
     print("ИИ думает...")
     value, move = minimax(board, depth=0, isMaxTurn=False, maxDepth=maxDepth)
     print(f"Оценка позиции для ИИ: {value}")
     print(f"ИИ выбирает ход: {move}")
+    # print(f"На глубине: {depth}")
     if move is not None:
         r, c = move
         board[r][c] = AI
