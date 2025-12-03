@@ -1,5 +1,6 @@
 import random
 from typing import Tuple
+import matplotlib.pyplot as plt
 
 
 class vacuumWorld:
@@ -168,8 +169,18 @@ def compareAgents(steps: int = 10, runs: int = 50):
                 log, total = simulateRand(world=world, agent=agent, steps=steps)
             rewardsPerStep = [entry["reward"] for entry in log]
             avgRewards = [a + b for a, b in zip(avgRewards, rewardsPerStep)]
-            avgRewards = [x / runs for x in avgRewards]
-            results[name] = avgRewards
+        avgRewards = [x / runs for x in avgRewards]
+        results[name] = avgRewards
+
+        plt.figure(figsize=(10, 5))
+        for name, rewards in results.items():
+            plt.plot(range(steps), rewards, label=name)
+        plt.xlabel("Step")
+        plt.ylabel("Avg reward")
+        plt.title(f"Avg reward per step (runs={runs})")
+        plt.legend()
+        plt.grid(True)
+        plt.show()
 
 
 if __name__ == "__main__":
