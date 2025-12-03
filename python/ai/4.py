@@ -1,4 +1,5 @@
 import math
+import time
 from copy import deepcopy
 
 BOARD_SIZE = 4
@@ -160,7 +161,7 @@ def ai_move(board, maxDepth):
     value, move = minimax(board, depth=0, isMaxTurn=False, maxDepth=maxDepth)
     print(f"Оценка позиции для ИИ: {value}")
     print(f"ИИ выбирает ход: {move}")
-    # print(f"На глубине: {depth}")
+    print(f"На глубине: {maxDepth}")
     if move is not None:
         r, c = move
         board[r][c] = AI
@@ -189,23 +190,32 @@ def play_game(maxDepth: int = 1):
     board = create_board()
     print("Игра начинается! Вы играете за X.")
     print_board(board)
+    timerAi = 0
     while True:
-        # Ход человека
+         # Ход человека
         board = human_move(board)
         print_board(board)
         if is_win(board, HUMAN):
-            print("Вы победили!")
-            break
+                print(timerAi/3)
+                print("Вы победили!")
+                break
         if is_draw(board):
-            print("Ничья!")
-            break
+                print(timerAi/3)
+                print("Ничья!")
+                break
         # Ход ИИ
+        start = time.perf_counter()
         board = ai_move(board, maxDepth=maxDepth)
+        end = time.perf_counter()
+        print(f"ИИ принял решение за {end - start} с")
+        timerAi += end - start
         print_board(board)
         if is_win(board, AI):
+            print(timerAi/3)
             print("ИИ победил!")
             break
         if is_draw(board):
+            print(timerAi/3)
             print("Ничья!")
             break
 
