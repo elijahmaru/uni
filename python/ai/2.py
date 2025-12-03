@@ -147,7 +147,7 @@ def simulateRand(
 
 
 def compareAgents(steps: int = 10, runs: int = 50):
-    agents = {"smartAgent": smartAgent(), "randomAgnt": randomAgent()}
+    agents = {"smartAgent": smartAgent(), "randomAgent": randomAgent()}
     results = {}
     initDirty = []
     for fst in (True, False):
@@ -172,15 +172,18 @@ def compareAgents(steps: int = 10, runs: int = 50):
         avgRewards = [x / runs for x in avgRewards]
         results[name] = avgRewards
 
-        plt.figure(figsize=(10, 5))
-        for name, rewards in results.items():
-            plt.plot(range(steps), rewards, label=name)
-        plt.xlabel("Step")
-        plt.ylabel("Avg reward")
-        plt.title(f"Avg reward per step (runs={runs})")
-        plt.legend()
-        plt.grid(True)
-        plt.show()
+    plt.figure(figsize=(10, 5))
+    for name, rewards in results.items():
+        plt.plot(range(steps), rewards, label=name)
+    plt.xlabel("Step")
+    plt.ylabel("Avg reward")
+    plt.title(f"Avg reward per step (runs={runs})")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+    print("График выведен")
+    for name, rewards in results.items():
+        print(f"{name}: Средний reward за шаг = {sum(rewards) / len(rewards):.3f}")
 
 
 if __name__ == "__main__":
