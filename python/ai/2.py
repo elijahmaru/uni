@@ -81,6 +81,8 @@ class vacuumWorld:
 class smartAgent:
     def act(self, percept: Tuple[str, str], lastAction: str) -> str:
         loc, status = percept
+        if loc == "A" and status == "Clean" and lastAction != "Suck":
+            return "NoOp"
         if status == "Dirty":
             return "Suck"
         elif loc == "B" and lastAction == "Left":
@@ -90,12 +92,12 @@ class smartAgent:
 
 class randomAgent:
     def act(self, percept: Tuple[str, str]) -> str:
-        loc, status = percept
-        if status == "Dirty" and loc == "C":
-            return "Go to A"
-        elif loc != "B":
-            return "Left" if loc == "C" else "Right"
-        return "Left" if bool(random.getrandbits(1)) else "Right"
+        loc, state = percept
+        allActions = ["Suck", "NoOp", "Left", "Right"]
+        action = random.choice(allActions)
+        if (loc == "A" and action == "Left") or (loc == "C" and action == "Right"):
+            return "NoOp"
+        return action
 
 
 def simulateSmart(
@@ -172,7 +174,7 @@ def compareAgents(steps: int = 10, runs: int = 50):
         avgRewards = [x / runs for x in avgRewards]
         results[name] = avgRewards
 
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(steps, 5))
     for name, rewards in results.items():
         plt.plot(range(steps), rewards, label=name)
     plt.xlabel("Step")
@@ -222,4 +224,4 @@ if __name__ == "__main__":
             print(entry, "\n")
         print("Total reward:", totalRand)
         print("=" * 40, "\n")
-    compareAgents()
+    compareAgents(steps=30)
