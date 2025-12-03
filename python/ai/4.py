@@ -185,7 +185,7 @@ def human_move(board):
     # ИГРОВОЙ ЦИКЛ
 
 
-def play_game():
+def play_game(maxDepth: int = 1):
     board = create_board()
     print("Игра начинается! Вы играете за X.")
     print_board(board)
@@ -200,7 +200,7 @@ def play_game():
             print("Ничья!")
             break
         # Ход ИИ
-        board = ai_move(board, maxDepth=2)
+        board = ai_move(board, maxDepth=maxDepth)
         print_board(board)
         if is_win(board, AI):
             print("ИИ победил!")
@@ -211,4 +211,5 @@ def play_game():
 
 
 if __name__ == "__main__":
-    play_game()
+    for depth in range(1, 4):
+        play_game(maxDepth=depth)
