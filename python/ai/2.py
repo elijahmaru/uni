@@ -153,10 +153,7 @@ def compareAgents(steps: int = 10, runs: int = 50):
     results = {}
     initDirty = []
     for fst in (True, False):
-        for snd in (
-            True,
-            False,
-        ):
+        for snd in (True, False):
             for trd in (True, False):
                 for i in range(0, 3):
                     initDirty.append(((fst, snd, trd), i))
@@ -164,11 +161,14 @@ def compareAgents(steps: int = 10, runs: int = 50):
     for name, agent in agents.items():
         avgRewards = [0.0] * steps
         for i in range(runs):
-            world = vacuumWorld(initDirty[i % 24][0], agentPos=initDirty[i % 3][1])
+            world = vacuumWorld(
+                initDirty[i % 24][0], agentPos=initDirty[i % 3][1])
             if name == "smartAgent":
-                log, total = simulateSmart(world=world, agent=agent, steps=steps)
+                log, total = simulateSmart(
+                    world=world, agent=agent, steps=steps)
             else:
-                log, total = simulateRand(world=world, agent=agent, steps=steps)
+                log, total = simulateRand(
+                    world=world, agent=agent, steps=steps)
             rewardsPerStep = [entry["reward"] for entry in log]
             avgRewards = [a + b for a, b in zip(avgRewards, rewardsPerStep)]
         avgRewards = [x / runs for x in avgRewards]
