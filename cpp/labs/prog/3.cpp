@@ -5,10 +5,10 @@ using namespace std;
 
 void createArr(int *&arr, int length);
 int getRandomInt(int start = 0, int end = 100) {
-    return start + rand() % (end + 1);
+    return start + rand() % (end - start + 1);
 }
-int countPositiveUneven(int *&arr, int length);
-void outputArray(int *&arr, int length);
+int countPositiveUneven(int *arr, int length);
+void outputArray(int *arr, int length);
 
 int main(int argc, char *argv[]) {
     srand(time(nullptr));
@@ -38,14 +38,14 @@ void createArr(int *&arr, int length) {
     }
 }
 
-void outputArray(const int *&arr, int length) {
+void outputArray(int *arr, int length) {
     cout << "[ ";
     for (int i = 0; i < length; i++) {
         cout << arr[i] << ((i != (length - 1)) ? ", " : " ]\n");
     }
 }
 
-int countPositiveUneven(const int *&arr, int length) {
+int countPositiveUneven(int *arr, int length) {
     int sum{};
     for (int i = 0; i < length; i++) {
         int item = arr[i];
