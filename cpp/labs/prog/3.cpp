@@ -16,18 +16,21 @@ int main(int argc, char *argv[]) {
     int length;
     cout << "Введите длину массивов n: ";
     cin >> length;
+    int length1;
+    cout << "Введите длину массивов m: ";
+    cin >> length1;
     int *X;
     int *Y;
     createArr(X, length);
-    createArr(Y, length);
+    createArr(Y, length1);
     cout << "Массив X: ";
     outputArray(X, length);
     cout << "Массив Y: ";
-    outputArray(Y, length);
+    outputArray(Y, length1);
     cout << "Кол-во нечетных элементов в массиве X: "
          << countPositiveUneven(X, length) << endl;
     cout << "Кол-во нечетных элементов в массиве Y: "
-         << countPositiveUneven(Y, length) << endl;
+         << countPositiveUneven(Y, length1) << endl;
     return 0;
 }
 
