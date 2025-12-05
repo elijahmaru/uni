@@ -5,7 +5,7 @@ using namespace std;
 void outputRes(int *arr[3]);
 int lcm(int fst, int snd);
 int gcd(int fst, int snd);
-int *foo(int fst, int snd);
+int *foo(int fstDiv, int fstNum, int sndDiv, int sndNum);
 
 int main(int argc, char *argv[]) {
     int a, b, c, d;
@@ -29,8 +29,12 @@ int gcd(int fst, int snd) {
     return gcd(snd % fst, fst);
 }
 
-int *foo(int fstNum, int fstDiv) {
+int *foo(int fstDiv, int fstNum, int sndDiv, int sndNum) {
     int res[3] = {0, 0, 0};
     int least = lcm(fstDiv, sndDiv);
-    int sum =
+    res[2] = least;
+    int sum = fstNum * (least / fstDiv) + sndNum * (least / sndDiv);
+    res[0] = sum / least;
+    res[1] = sum % least;
+    return &res;
 }
