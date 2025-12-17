@@ -221,7 +221,8 @@ def play_game(maxDepth: int = 1):
 
 
 if __name__ == "__main__":
-    for depth in range(1, 4):
-        print(f"Игра с ИИ с глибиной {depth}")
-        play_game(maxDepth=depth)
-        print("=" * 40)
+    play_game(maxDepth=1)
+    #for depth in range(1, 4):
+    #    print(f"Игра с ИИ с глибиной {depth}")
+    #    play_game(maxDepth=depth)
+    #   print("=" * 40)
