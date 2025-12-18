@@ -1,4 +1,4 @@
 MRSU of Ogareva\
 Software engineering\
-Data analysis and artificial intelligence\
+Data analysis and artificial intelligence
 
