@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
     cout << "Введите b: ";
     cin >> b;
     cout << "Введите c: ";
+
     cin >> c;
     cout << "Введите d: ";
     cin >> d;
