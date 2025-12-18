@@ -1,3 +1,3 @@
-MRSU of Ogareva
-Software engineering
-Data analysis and artificial intelligence
+MRSU of Ogareva\n
+Software engineering\n
+Data analysis and artificial intelligence\n
