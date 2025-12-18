@@ -11,7 +11,9 @@ int main(int argc, char *argv[]) {
         cout << "Введите дату рождения: ";
         cin >> date;
     } while ((date < 1) | (date > 31));
+
     int hash = (month - 1) * 31 + date;
+    
     switch (hash) {
     case 21 ... 51:
         cout << "водолей" << endl;
