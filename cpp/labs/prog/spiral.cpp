@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
         }
     }
     makeSpiral(matr);
+    outputArray(matr);
     return 0;
 }
 
@@ -37,15 +38,14 @@ void makeSpiral(int arr[7][7]) {
     int sum = 0;
     int direction = 0;
     for (int i = 0; i <= 49; i++) {
-        arr[row][colomn] = i;
-        outputArray(arr);
+        arr[colomn][row] = i;
         int left = colomn - 1;
         int right = colomn + 1;
         int up = row - 1;
         int down = row + 1;
         sum = check(arr, row, left) + check(arr, row, right) +
               check(arr, up, colomn) + check(arr, down, colomn);
-        if (sum >= 2) {
+        if (sum >= 3) {
             direction = (direction + 1) % 4;
         }
         switch (direction) {
