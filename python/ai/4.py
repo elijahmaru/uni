@@ -2,8 +2,8 @@ import math
 import time
 from copy import deepcopy
 
-BOARD_SIZE = 4
-WIN_LENGTH = 3
+boardSize = 4
+winLength = 3
 HUMAN = "X"
 AI = "O"
 EMPTY = "."
@@ -11,14 +11,14 @@ EMPTY = "."
 
 
 def create_board():
-    return [[EMPTY for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+    return [[EMPTY for _ in range(boardSize)] for _ in range(boardSize)]
 
 
 # Вывод в консоль игрового поля
 
 
 def print_board(board):
-    print("\n " + " ".join(str(i) for i in range(BOARD_SIZE)))
+    print("\n " + " ".join(str(i) for i in range(boardSize)))
     for i, row in enumerate(board):
         print(i, " ".join(row))
     print()
@@ -29,24 +29,24 @@ def print_board(board):
 
 def is_win(board, player):
     # Проверка горизонталей
-    for r in range(BOARD_SIZE):
-        for c in range(BOARD_SIZE - WIN_LENGTH + 1):
-            if all(board[r][c + i] == player for i in range(WIN_LENGTH)):
+    for r in range(boardSize):
+        for c in range(boardSize - winLength + 1):
+            if all(board[r][c + i] == player for i in range(winLength)):
                 return True
     # Проверка вертикалей
-    for c in range(BOARD_SIZE):
-        for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-            if all(board[r + i][c] == player for i in range(WIN_LENGTH)):
+    for c in range(boardSize):
+        for r in range(boardSize - winLength + 1):
+            if all(board[r + i][c] == player for i in range(winLength)):
                 return True
         # Проверка диагоналей
-    for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-        for c in range(BOARD_SIZE - WIN_LENGTH + 1):
-            if all(board[r + i][c + i] == player for i in range(WIN_LENGTH)):
+    for r in range(boardSize - winLength + 1):
+        for c in range(boardSize - winLength + 1):
+            if all(board[r + i][c + i] == player for i in range(winLength)):
                 return True
     # Проверка обратных диагоналей
-    for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-        for c in range(WIN_LENGTH - 1, BOARD_SIZE):
-            if all(board[r + i][c - i] == player for i in range(WIN_LENGTH)):
+    for r in range(boardSize - winLength + 1):
+        for c in range(winLength - 1, boardSize):
+            if all(board[r + i][c - i] == player for i in range(winLength)):
                 return True
     return False
 
@@ -56,7 +56,7 @@ def is_win(board, player):
 
 def is_draw(board):
     return all(
-        board[r][c] != EMPTY for r in range(BOARD_SIZE) for c in range(BOARD_SIZE)
+        board[r][c] != EMPTY for r in range(boardSize) for c in range(boardSize)
     )
 
 
@@ -65,8 +65,8 @@ def is_draw(board):
 
 def get_valid_moves(board):
     moves = []
-    for r in range(BOARD_SIZE):
-        for c in range(BOARD_SIZE):
+    for r in range(boardSize):
+        for c in range(boardSize):
             if board[r][c] == EMPTY:
                 moves.append((r, c))
     return moves
@@ -76,21 +76,21 @@ def heuristic(board):
     score = 0
     lines = []
     # Горизонтали
-    for r in range(BOARD_SIZE):
-        for c in range(BOARD_SIZE - WIN_LENGTH + 1):
-            lines.append([board[r][c + i] for i in range(WIN_LENGTH)])
+    for r in range(boardSize):
+        for c in range(boardSize - winLength + 1):
+            lines.append([board[r][c + i] for i in range(winLength)])
     # Вертикали
-    for c in range(BOARD_SIZE):
-        for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-            lines.append([board[r + i][c] for i in range(WIN_LENGTH)])
+    for c in range(boardSize):
+        for r in range(boardSize - winLength + 1):
+            lines.append([board[r + i][c] for i in range(winLength)])
     # Диагонали
-    for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-        for c in range(BOARD_SIZE - WIN_LENGTH + 1):
-            lines.append([board[r + i][c + i] for i in range(WIN_LENGTH)])
+    for r in range(boardSize - winLength + 1):
+        for c in range(boardSize - winLength + 1):
+            lines.append([board[r + i][c + i] for i in range(winLength)])
     # Обратные диагонали
-    for r in range(BOARD_SIZE - WIN_LENGTH + 1):
-        for c in range(WIN_LENGTH - 1, BOARD_SIZE):
-            lines.append([board[r + i][c - i] for i in range(WIN_LENGTH)])
+    for r in range(boardSize - winLength + 1):
+        for c in range(winLength - 1, boardSize):
+            lines.append([board[r + i][c - i] for i in range(winLength)])
     # Подсчёт
     for line in lines:
         xCount = line.count(HUMAN)
@@ -176,7 +176,7 @@ def human_move(board):
         try:
             r = int(input("Введите номер строки: "))
             c = int(input("Введите номер столбца: "))
-            if 0 <= r < BOARD_SIZE and 0 <= c < BOARD_SIZE and board[r][c] == EMPTY:
+            if 0 <= r < boardSize and 0 <= c < boardSize and board[r][c] == EMPTY:
                 board[r][c] = HUMAN
                 return board
             else:
