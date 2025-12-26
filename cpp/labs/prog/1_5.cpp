@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 int main() {
@@ -29,11 +30,10 @@ int main() {
         decimal = abs(decimal);
     }
     while (decimal > 0) {
-        if (decimal % 16 >= 10) {
+        if (decimal % 16 >= 10)
             last = (char)(decimal % 16 + 55);
-        } else {
+        else
             last = to_string(decimal % 16);
-        }
         hex = last + hex;
         decimal /= 16;
     }
