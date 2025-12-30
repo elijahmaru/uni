@@ -50,5 +50,6 @@ int main(int argc, char *argv[]) {
         break;
     default:
         cout << "козерог" << endl;
-    } return 0;
+    }
+    return 0;
 }
