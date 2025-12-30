@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     } while ((date < 1) | (date > 31));
 
     int hash = (month - 1) * 31 + date;
-    
+
     switch (hash) {
     case 21 ... 51:
         cout << "водолей" << endl;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
         cout << "дева" << endl;
         break;
     case 272 ... 302:
-        cout << "высы" << endl;
+        cout << "весы" << endl;
         break;
     case 303 ... 332:
         cout << "скорпион" << endl;
@@ -50,6 +50,5 @@ int main(int argc, char *argv[]) {
         break;
     default:
         cout << "козерог" << endl;
-    }
-    return 0;
+    } return 0;
 }
