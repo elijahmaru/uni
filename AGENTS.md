@@ -1,3 +1,8 @@
+---
+description: 
+alwaysApply: true
+---
+
 # AI Agent Guidelines
 
 This file provides instructions for AI coding assistants (like Claude Code, GitHub Copilot, etc.) working with students in this course.
