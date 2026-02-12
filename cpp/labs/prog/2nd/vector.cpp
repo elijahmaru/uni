@@ -12,7 +12,7 @@ void outputVector(const vector<int> &);
 void fillVector(vector<int> &);
 void removeMin(vector<int> &);
 vector<int>::iterator minElement(vector<int> &);
-void insertMsinceX(vector<int> &, int, int);
+void insertMatX(vector<int> &, int, int);
 void changeNear(vector<int> &, int);
 vector<int> findValue(vector<int> &, int);
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     cin >> m;
     cout << "Введите x: ";
     cin >> x;
-    insertMsinceX(A, m, x);
+    insertMatX(A, m, x);
     outputVector(A);
     int pos;
     cout << "Введите позицию первого из пары для замены: ";
@@ -45,7 +45,7 @@ void outputVector(const vector<int> &vec) {
     cout << "{ ";
     for (vector<int>::const_iterator iterator = vec.begin();
          iterator != vec.end(); ++iterator) {
-        cout << *iterator << ((iterator != vec.end() - 1) ? ", " : "}");
+        cout << *iterator << ((iterator != vec.end() - 1) ? ", " : "}\n");
     }
 }
 
@@ -57,9 +57,9 @@ void fillVector(vector<int> &vec) {
 }
 
 vector<int>::iterator minElement(vector<int> &vec) {
-    vector<int>::iterator iteratorToMin = vec.end();
+    vector<int>::iterator iteratorToMin = vec.begin();
     for (vector<int>::iterator iterator = vec.begin(); iterator != vec.end();
-         iterator++) {
+         ++iterator) {
         if (*iteratorToMin > *iterator) {
             iteratorToMin = iterator;
         }
@@ -68,15 +68,22 @@ vector<int>::iterator minElement(vector<int> &vec) {
 }
 
 void removeMin(vector<int> &vec) {
-    if (minElement(vec) == vec.end())
-        return;
-    vec.erase(minElement(vec));
+    int minValue = *minElement(vec);
+    for (vector<int>::iterator iterator = vec.begin(); iterator != vec.end();) {
+        if (*iterator == minValue) {
+            vec.erase(iterator);
+        } else {
+            ++iterator;
+        }
+    }
 }
 
-void insertMsinceX(vector<int> &vec, int m, int x) {
+void insertMatX(vector<int> &vec, int m, int x) {
     if (m == 0) {
         return;
     }
+    if (x < 0 || x > vec.size() - 1)
+        return;
     vector<int> values(m);
     for (vector<int>::iterator iterator = values.begin();
          iterator != values.end(); ++iterator) {
@@ -96,11 +103,11 @@ void changeNear(vector<int> &vec, int pos) {
 }
 
 vector<int> findValue(vector<int> &vec, int val) {
-    vector<int> vectorOfIterators;
+    vector<int> vectorOfIndexes;
     for (int i = 0; i < vec.size(); i++) {
         if (vec[i] == val) {
-            vectorOfIterators.push_back(i);
+            vectorOfIndexes.push_back(i);
         }
     }
-    return vectorOfIterators;
+    return vectorOfIndexes;
 }
