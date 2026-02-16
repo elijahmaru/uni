@@ -14,8 +14,12 @@ vector<vector<int>> matrixByMatrix(vector<vector<int>> &,
 int main(int argc, char *argv[]) {
     vector<vector<int>> A = createMatrix();
     vector<vector<int>> B = createMatrix();
-    vector<vector<int>> C;
-    if (A.size() == B.size() && A[0].size() == B[0].size()) {
+    vector<vector<int>> C = matrixByMatrix(A, A);
+    C = sumOrDiffOfMatrixes(C, B, '+');
+    vector<vector<int>> buff = sumOrDiffOfMatrixes(A, B, '-');
+    buff = matrixByNumber(buff, 2);
+    C = matrixByMatrix(buff, C);
+    /*if (A.size() == B.size() && A[0].size() == B[0].size()) {
         char operation = '=';
         do {
             cout << "Введите какую операцию вы хотите совешить(+/-): ";
@@ -38,7 +42,7 @@ int main(int argc, char *argv[]) {
         outputMatrix(C);
     } else {
         cout << "Матрицы нельзя умножить";
-    }
+    }*/
     return 0;
 }
 
