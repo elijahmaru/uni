@@ -15,6 +15,7 @@ int findNumbersFromRangeXY(int **, int, int, int, int);
 void formatOrder(int *, int *);
 
 int main(int argc, char *argv[]) {
+    srand(time(nullptr));
     int m;
     cout << "Введите m: ";
     cin >> m;
@@ -82,7 +83,6 @@ void populateMatrixKeyboard(int **arr, int height, int length) {
 }
 
 void populateMatrix(int **arr, int height, int length) {
-    srand(time(nullptr));
     int start, end;
     cout << "Введите промежуток из которого будут выбраны рандомные числа\n"
             "Начало отрезка: ";
