@@ -1,4 +1,4 @@
-// Р’Р°СЂРёР°РЅС‚ 5
+// Вариант 5
 
 #include <cstdlib>
 #include <ctime>
@@ -26,21 +26,21 @@ int main(int argc, char *argv[]) {
     outputVector(A);
     A = buff;
     int m, x;
-    cout << "Р’РІРµРґРёС‚Рµ m: ";
+    cout << "Введите m: ";
     cin >> m;
-    cout << "Р’РІРµРґРёС‚Рµ x: ";
+    cout << "Введите x: ";
     cin >> x;
     insertMatX(A, m, x);
     outputVector(A);
     A = buff;
     int pos;
-    cout << "Р’РІРµРґРёС‚Рµ РїРѕР·РёС†РёСЋ РїРµСЂРІРѕРіРѕ РёР· РїР°СЂС‹ РґР»СЏ Р·Р°РјРµРЅС‹: ";
+    cout << "Введите позицию первого из пары для замены: ";
     cin >> pos;
     changeNear(A, pos);
     outputVector(A);
     A = buff;
     int val;
-    cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ РєРѕС‚РѕСЂРѕРµ С…РѕС‚РёС‚Рµ РЅР°Р№С‚Рё: ";
+    cout << "Введите значение которое хотите найти: ";
     cin >> val;
     outputVector(findValue(A, val));
     A = buff;
@@ -93,7 +93,7 @@ void insertMatX(vector<int> &vec, int m, int x) {
     vector<int> values(m);
     for (vector<int>::iterator iterator = values.begin();
          iterator != values.end(); ++iterator) {
-        cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ: ";
+        cout << "Введите значение: ";
         cin >> *iterator;
     }
     vec.insert(vec.begin() + x, values.begin(), values.end());
