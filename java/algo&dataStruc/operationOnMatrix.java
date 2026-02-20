@@ -55,27 +55,4 @@ public class operationOnMatrix {
             System.out.println();
         }
     }
-
-    public static void main(String[] args) {
-        int[][] matrix1 = {
-                {0, 1, 5},
-                {2, 3, 6},
-        };
-        int[][] matrix2 = {
-                {0, 1},
-                {2, 3},
-                {6, 8}
-        };
-        int k = 6;
-        System.out.println("Матрица А:");
-        printMatrix(matrix1);
-        System.out.println("Матрица В:");
-        printMatrix(matrix2);
-        System.out.println("А*В");
-        printMatrix(multiplyMatrixes(matrix1, matrix2));
-        System.out.println("А*k");
-        printMatrix(multiplyMatrixByNum(matrix1, k));
-        System.out.println("A+B");
-        printMatrix(addMatrixes(matrix1, matrix2));
-    }
 }
