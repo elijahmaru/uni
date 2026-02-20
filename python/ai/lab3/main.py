@@ -11,7 +11,8 @@ def generateRandomArray(
 listA = generateRandomArray()
 listB = generateRandomArray()
 pipelineForA = [fp.mean, fp.median, fp.variance, fp.std]
-pipelineForB = [fp.min_max_scale, fp.log_scale, fp.standardize, fp.remove_outliers]
+pipelineForB = [fp.min_max_scale, fp.log_scale,
+                fp.standardize, fp.remove_outliers]
 fp.apply_pipeline(listB, pipelineForB)
 for func in pipelineForA:
     print(func(listA))

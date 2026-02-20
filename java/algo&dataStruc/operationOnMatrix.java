@@ -1,4 +1,4 @@
-public class Main {
+public class operationOnMatrix {
 
     public static int[][] multiplyMatrixes(int[][] matrixA, int[][] matrixB) {
         int rowsA = matrixA.length;
