@@ -1,9 +1,9 @@
 public class intArray {
-    private int[] arr;
+    private int[] data;
     private int len;
 
     public intArray(){
-        this.arr = new int[10];
+        this.data = new int[10];
         this.len = 0;
     }
 
@@ -12,24 +12,24 @@ public class intArray {
     }
 
     public void add(int value) {
-        if (len == arr.length) {
+        if (len == data.length) {
             int[] newArr = new int[len * 2];
-            System.arraycopy(arr, 0, newArr, 0, arr.length);
-            arr = newArr;
+            System.arraycopy(data, 0, newArr, 0, data.length);
+            data = newArr;
         }
-        arr[len++] = value;
+        data[len++] = value;
     }
 
     public int at(int index) {
         if (index < 0 || index >= len) {
             throw new IndexOutOfBoundsException("индекс: " + index + " хотя размер " + len + ". Инднекс за границами");
         }
-        return arr[index];
+        return data[index];
     }
 
     public int find(int value) {
         for (int i = 0; i < len; i++) {
-            if (value == arr[i]){
+            if (value == data[i]){
                 return i;
             }
         }
@@ -39,35 +39,35 @@ public class intArray {
     public void delete(int value) {
         int amountOfValue = 0;
         for (int i = 0; i < len; i++) {
-            if (value == arr[i]){
+            if (value == data[i]){
                 amountOfValue++;
             }
         }
         int[] newArr = new int[len - amountOfValue];
         int index = 0;
         for (int i = 0; i < len; i++) {
-            if (arr[i] != value) {
-                newArr[index++] = arr[i];
+            if (data[i] != value) {
+                newArr[index++] = data[i];
             }
         }
-        arr = newArr;
+        data = newArr;
         len -= amountOfValue;
     }
 
     public int min() {
         if (len == 0) throw new IllegalArgumentException("Массив пустой");
-        int min = arr[0];
+        int min = data[0];
         for (int i = 0; i < len; i++) {
-            if (arr[i]<min) min = arr[i];
+            if (data[i]<min) min = data[i];
         }
         return min;
     }
 
     public int max() {
         if (len == 0) throw new IllegalArgumentException("Массив пустой");
-        int max = arr[0];
+        int max = data[0];
         for (int i = 0; i < len; i++) {
-            if (arr[i]>max) max = arr[i];
+            if (data[i]>max) max = data[i];
         }
         return max;
     }

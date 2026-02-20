@@ -1,16 +1,11 @@
 public class Main {
     static void main() {
-        intArray testArr = new intArray();
-        for (int i = 0; i < 12; i++) {
-            testArr.add(1);
-        }
-        for (int i = 0; i < testArr.size(); i++) {
-            System.out.println(testArr.at(i));
-        }
-        testArr.delete(1);
-        for (int i = 0; i < testArr.size(); i++) {
-            System.out.println(testArr.at(i));
-        }
+        int a = 2;
+        int b = 3;
+        a = a^b;
+        b = a^b;
+        a = a^b;
+        System.out.println(a + "  " + b);
     }
 
 }
