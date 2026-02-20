@@ -7,7 +7,7 @@ public class operationOnMatrix {
         int colomsB = matrixB[0].length;
         int[][] result = new int[rowsA][colomsB];
         if (colomsA != rowsB) {
-            throw new IllegalArgumentException("Dimensions incompatible for operation");
+            throw new IllegalArgumentException("Несовпадение размеров");
         }
         for (int i = 0; i < rowsA; i++) {
             for (int j = 0; j < colomsB; j++) {
@@ -37,7 +37,7 @@ public class operationOnMatrix {
         int colomsB = matrixB[0].length;
         int[][] result = new int[rowsA][colomsA];
         if (colomsA != colomsB && rowsA != rowsB) {
-            throw new IllegalArgumentException("Dimensions incompatible for operation");
+            throw new IllegalArgumentException("Несовпадение размеров");
         }
         for (int i = 0; i < matrixA.length; i++) {
             for (int j = 0; j < matrixA[0].length; j++) {
