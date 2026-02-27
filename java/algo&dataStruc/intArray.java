@@ -56,33 +56,27 @@ public class intArray {
     }
 
     public int min() {
-        if (len == 0)
-            throw new IllegalArgumentException("Массив пустой");
+        if (len == 0) throw new IllegalArgumentException("Массив пустой");
         int min = data[0];
         for (int i = 0; i < len; i++) {
-            if (data[i] < min)
-                min = data[i];
+            if (data[i] < min) min = data[i];
         }
         return min;
     }
 
     public int max() {
-        if (len == 0)
-            throw new IllegalArgumentException("Массив пустой");
+        if (len == 0) throw new IllegalArgumentException("Массив пустой");
         int max = data[0];
         for (int i = 0; i < len; i++) {
-            if (data[i] > max)
-                max = data[i];
+            if (data[i] > max) max = data[i];
         }
         return max;
     }
 
     public int average() {
-        if (len == 0)
-            throw new IllegalArgumentException("Массив пустой");
+        if (len == 0) throw new IllegalArgumentException("Массив пустой");
         int sum = 0;
-        for (int i = 0; i < len; i++)
-            sum++;
+        for (int i = 0; i < len; i++) sum++;
         return sum / len;
     }
 }
