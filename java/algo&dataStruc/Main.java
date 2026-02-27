@@ -1,12 +1,16 @@
 public class Main {
     static void main() {
-        int[] array = {9, 8, 3, 4, 3, 1, 2};
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
-        array = bubbleSort(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
+        arrayQueue a = new arrayQueue();
+        a.push(10);
+        a.push(12);
+        a.push(16);
+        System.out.println(a.size());
+        System.out.println(a.peek());
+        System.out.println(a.pop());
+        System.out.println(a.peek());
+        a.pop();
+        a.pop();
+        System.out.println(a.isEmpty());
+
     }
 }

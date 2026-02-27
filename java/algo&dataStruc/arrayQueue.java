@@ -1,10 +1,12 @@
-public class arrayStack {
+public class arrayQueue {
     private int[] data;
     private int len;
+    private int indexOfStart;
 
-    public arrayStack() {
+    public arrayQueue() {
         this.data = new int[10];
         this.len = 0;
+        this.indexOfStart = 0;
     }
 
     public boolean isEmpty() {
@@ -21,14 +23,15 @@ public class arrayStack {
             System.arraycopy(data, 0, newData, 0, data.length);
             data = newData;
         }
-        data[len++] = value;
+        data[(indexOfStart + len++) % data.length] = value;
     }
 
     public int pop() {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException("stack already empty");
         } else {
-            return data[--len];
+            len--;
+            return data[indexOfStart++];
         }
     }
 
@@ -36,7 +39,7 @@ public class arrayStack {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException("stack is empty");
         } else {
-            return data[len-1];
+            return data[indexOfStart];
         }
     }
 
