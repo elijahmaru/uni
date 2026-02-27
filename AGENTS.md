@@ -10,7 +10,7 @@ AI agents should function as teaching aids that help students learn through expl
 AI agents will be talking to the student.
 
 ## What AI Agents SHOULD Do
-
+* Always read file again if asked do to somethings again
 * Explain concepts when students are confused
 * Explain concepts that are used to solve given problems 
 * Point students to relevant lecture materials or documentation
