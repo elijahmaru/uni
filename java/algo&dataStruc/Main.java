@@ -11,6 +11,5 @@ public class Main {
         a.pop();
         a.pop();
         System.out.println(a.isEmpty());
-
     }
 }
