@@ -12,9 +12,15 @@ void outputVector(const vector<int> &);
 void fillVector(vector<int> &);
 void removeMin(vector<int> &);
 vector<int>::iterator minElement(vector<int> &);
+vector<int>::iterator maxElement(vector<int> &);
 void insertMatX(vector<int> &, int, int);
 void changeNear(vector<int> &, int);
 vector<int> findValue(vector<int> &, int);
+// Варина 3
+void removeStartingFrom(vector<int> &, int, int);
+void insertAtStart(vector<int> &, int);
+void changeMaxAndMin(vector<int> &);
+int firstEvenAt(vector<int> &);
 
 int main(int argc, char *argv[]) {
     srand(time(nullptr));
@@ -44,6 +50,24 @@ int main(int argc, char *argv[]) {
     cin >> val;
     outputVector(findValue(A, val));
     A = buff;
+    cout << "Варинат №3\n";
+    fillVector(A);
+    int M, K;
+    do {
+        cout << "Введите сколько элементов хотите удалить :";
+        cin >> M;
+        cout << "Введите с какого индекса хотите удалить :";
+    } while (M + K > A.size());
+    removeStartingFrom(A, M, K);
+    outputVector(A);
+    int X;
+    cout << "Сколько элементов хотите добавить :";
+    cin >> X;
+    insertAtStart(A, X);
+    outputVector(A);
+    changeMaxAndMin(A);
+    outputVector(A);
+    cout << "Первый чётный элемент: " << A.at(firstEvenAt(A)) << endl;
     return 0;
 }
 
@@ -73,6 +97,16 @@ vector<int>::iterator minElement(vector<int> &vec) {
     return iteratorToMin;
 }
 
+vector<int>::iterator maxElement(vector<int> &vec) {
+    vector<int>::iterator iteratorToMax = vec.begin();
+    for (vector<int>::iterator iterator = vec.begin(); iterator != vec.end();
+         ++iterator) {
+        if (*iteratorToMax < *iterator) {
+            iteratorToMax = iterator;
+        }
+    }
+    return iteratorToMax;
+}
 void removeMin(vector<int> &vec) {
     int minValue = *minElement(vec);
     for (vector<int>::iterator iterator = vec.begin(); iterator != vec.end();) {
@@ -116,4 +150,37 @@ vector<int> findValue(vector<int> &vec, int val) {
         }
     }
     return vectorOfIndexes;
+}
+// Вариант 3
+void removeStartingFrom(vector<int> &vec, int M, int K) {
+    for (int i = 0; i < M && i + K < vec.size(); i++) {
+        vec.erase(vec.begin() + K);
+    }
+}
+
+void insertAtStart(vector<int> &vec, int X) {
+    vector<int> values(X);
+    for (vector<int>::iterator iterator = values.begin();
+         iterator != values.end(); ++iterator) {
+        cout << "Введите значение: ";
+        cin >> *iterator;
+    }
+    vec.insert(vec.begin(), values.begin(), values.end());
+}
+
+void changeMaxAndMin(vector<int> &vec) {
+    vector<int>::iterator itToMin = minElement(vec);
+    vector<int>::iterator itToMax = maxElement(vec);
+    int buff = *itToMax;
+    *itToMax = *itToMin;
+    *itToMin = buff;
+}
+
+int firstEvenAt(vector<int> &vec) {
+    for (size_t i = 0; i < vec.size(); i++) {
+        if (vec.at(i) % 2 == 0) {
+            return i;
+        }
+    }
+    return -1;
 }

@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
     vector<vector<int>> buff = sumOrDiffOfMatrixes(A, B, '-');
     buff = matrixByNumber(buff, 2);
     C = matrixByMatrix(buff, C);
+    outputMatrix(C);
     /*if (A.size() == B.size() && A[0].size() == B[0].size()) {
         char operation = '=';
         do {
