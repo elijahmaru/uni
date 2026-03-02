@@ -25,7 +25,7 @@ int firstEvenAt(vector<int> &);
 int main(int argc, char *argv[]) {
     srand(time(nullptr));
     vector<int> A(10);
-    fillVector(A);
+    /*fillVector(A);
     outputVector(A);
     vector<int> buff = A;
     removeMin(A);
@@ -49,14 +49,16 @@ int main(int argc, char *argv[]) {
     cout << "Введите значение которое хотите найти: ";
     cin >> val;
     outputVector(findValue(A, val));
-    A = buff;
+    A = buff;*/
     cout << "Варинат №3\n";
     fillVector(A);
+    outputVector(A);
     int M, K;
     do {
         cout << "Введите сколько элементов хотите удалить :";
         cin >> M;
         cout << "Введите с какого индекса хотите удалить :";
+        cin >> K;
     } while (M + K > A.size());
     removeStartingFrom(A, M, K);
     outputVector(A);
@@ -67,7 +69,7 @@ int main(int argc, char *argv[]) {
     outputVector(A);
     changeMaxAndMin(A);
     outputVector(A);
-    cout << "Первый чётный элемент: " << A.at(firstEvenAt(A)) << endl;
+    cout << "Первый чётный элемент: " << firstEvenAt(A) << endl;
     return 0;
 }
 

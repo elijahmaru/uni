@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ void changeNear(vector<int> &, int);
 vector<int> findValue(vector<int> &, int);
 
 int main(int argc, char *argv[]) {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
     srand(time(nullptr));
     vector<int> A(10);
     fillVector(A);
