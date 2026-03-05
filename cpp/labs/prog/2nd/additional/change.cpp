@@ -14,6 +14,7 @@ void changeQuaters(int **, int);
 void mySwap(int *, int *);
 
 int main(int argc, char *argv[]) {
+    srand(time(nullptr));
     int n;
     do {
         cout << "Введите n: ";
@@ -22,16 +23,15 @@ int main(int argc, char *argv[]) {
     int a = 1;
     int b = 10;
     int **arr = createMatrix(n, a, b);
-    int **arrNear = arr;
-    int **arrQuaters = arr;
     cout << "Изначальная матрица :\n";
-    outputMatr(arrNear, n);
-    changeNear(arrNear, n);
+    outputMatr(arr, n);
     cout << "Изменённая матрица 1 :\n";
-    outputMatr(arrNear, n);
+    changeNear(arr, n);
+    outputMatr(arr, n);
 
     cout << "Изменённая матрица 2 :\n";
-    outputMatr(arrQuaters, n);
+    changeQuaters(arr, n);
+    outputMatr(arr, n);
     return 0;
 }
 
@@ -45,7 +45,6 @@ void outputMatr(int **arr, int length) {
 }
 
 void populateMatrix(int **arr, int length, int start, int end) {
-    srand(time(nullptr));
     for (int i = 0; i < length; i++) {
         for (int j = 0; j < length; j++) {
             arr[i][j] = getRandomInt(start, 10);
@@ -71,8 +70,13 @@ void changeNear(int **arr, int length) {
     }
 }
 
-void changeQuaters(int **, int length){
-    
+void changeQuaters(int **arr, int length) {
+    for (size_t i = 0; i < length / 2; i++) {
+        for (size_t j = 0; j < length; j++) {
+            mySwap(&arr[i][j],
+                   &arr[(i + length / 2) % length][(j + length / 2) % length]);
+        }
+    }
 }
 
 void mySwap(int *a, int *b) {
