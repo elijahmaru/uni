@@ -13,13 +13,14 @@ print(f"Изменённая форма: {data.shape}")
 avgPerHour = data.mean(axis=(1, 2))
 avgPerSensor = data.mean(axis=(0, 1))
 avgPerHourAndSensor = data.mean(axis=1)
-dataNotLinear = data / (1 + abs(data))
+dataNotLinear = data / (1 + np.abs(data))
 if data.shape == dataNotLinear.shape:
-    dataDelta = abs(data - dataNotLinear)
+    dataDelta = np.abs(data - dataNotLinear)
     maxChange = dataDelta.max()
     data = dataNotLinear
 else:
-    raise TypeError("Wrong shape of the array after application of the formula")
+    raise TypeError(
+        "Wrong shape of the array after application of the formula")
 print("Максимальное изменение: ", maxChange)
 
 # task 2
@@ -44,7 +45,8 @@ d2 = np.sqrt(np.maximum(norms[:, None] + norms[None, :] - 2 * X @ X.T, 0))
 endTime = time.perf_counter()
 timeForD2 = endTime - startTime
 print(f"Время для первого: {timeForD1}\nВремя для второго: {timeForD2}")
-indexOfClothestPoint = np.argmin(d1)
+i, j = np.unravel_index(np.argmin(d1 + np.eye(len(d1)) * np.inf), d1.shape)
+print(f"Индексы ближайших к друг другу:{i}, {j}")
 
 # task 3
 X = np.random.rand(1000, 10)
@@ -69,5 +71,5 @@ boolMask = (X > avgPerRow) & (X < avgPerCol)
 X[boolMask] = 0
 endShape = X.shape
 replacementCount = np.sum(boolMask)
-print(f"Элементов измененно: {replacementCount}")
+print(f"Элементов изменено: {replacementCount}")
 print(f"Провекрка неизменности формы :{startShape == endShape}")
