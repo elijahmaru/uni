@@ -1,4 +1,4 @@
-// Вариант 5
+// Вариант 3
 
 #include <cstdlib>
 #include <ctime>

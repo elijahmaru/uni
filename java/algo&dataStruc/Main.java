@@ -1,15 +1,24 @@
 public class Main {
     static void main() {
-        arrayQueue a = new arrayQueue();
-        a.push(10);
-        a.push(12);
-        a.push(16);
-        System.out.println(a.size());
-        System.out.println(a.peek());
-        System.out.println(a.pop());
-        System.out.println(a.peek());
-        a.pop();
-        a.pop();
-        System.out.println(a.isEmpty());
+        myDoubleLinkedList list = new myDoubleLinkedList();
+        list.addEnd(1);
+        list.display();
+        list.addStart(2);
+        list.display();
+        list.addEnd(5);
+        list.display();
+        list.addAfter(3, 1);
+        list.display();
+        list.addEnd(3);
+        list.addEnd(3);
+        list.addEnd(5);
+        list.addEnd(3);
+        list.addEnd(3);
+        list.display();
+        list.addAfter(0, 5);
+        list.display();
+        list.remove(3);
+        list.display();
+        list.displayRev();
     }
 }
