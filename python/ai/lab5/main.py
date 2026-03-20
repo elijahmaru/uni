@@ -16,9 +16,9 @@ print(f"среднея оценка дисциплины: {avgOfStudent.shape}")
 goodStudents = np.greater(avgOfStudent, 85)
 badStudents = np.less(avgOfStudent, 60)
 bestStudent = avgOfStudent.argmax()
-worstStudent = avgOfStudent.argmin()
+worstStudent = avgOfStudent.argmin()[0]
 hardestDisciplins = avgOfDiscipline.argsort()[:3]
-rankings = np.sort(avgOfStudent)
+rankings = np.argsort(avgOfStudent)
 
 # task 3
 transactions = np.random.randint(-100, 500, size=10000)
@@ -35,7 +35,8 @@ lengths = ends - starts
 indexOfLongest = lengths.argmax()
 startIndex = starts[indexOfLongest]
 endIndex = ends[indexOfLongest]
-indexOfAnomalyies = np.where(transactions.__abs__() > balanceHistory.std() * 3)[0]
+indexOfAnomalyies = np.where(
+    transactions.__abs__() > balanceHistory.std() * 3)[0]
 
 # task 4
 signal = np.random.randint(0, 10, size=50000)
@@ -54,9 +55,9 @@ def similarity(first: np.ndarray, second: np.ndarray) -> np.float16:
 
 
 similarityMatrix = np.zeros((200, 200))
-for i in range(200):
-    for j in range(200):
-        similarityMatrix[i, j] = similarity(matrix[i], matrix[j])
+similarityMatrix = np.linalg.norm(
+    matrix[:, None, :] - matrix[None, :, :], axis=2)
+recommendationsToUsers = np.zeros(200)
 for targetUser in range(200):
     similarUsers = similarityMatrix[targetUser].argsort()
     similarUsers = similarUsers[similarUsers != targetUser][:5]
@@ -64,3 +65,4 @@ for targetUser in range(200):
     userItems = matrix[targetUser]
     recommendations = similarItems * (1 - userItems)
     recommendations = np.argsort(recommendations)[::-1][:5]
+    recommendationsToUsers[targetUser](recommendations)
