@@ -26,4 +26,41 @@ balanceHistory = transactions.cumsum()
 minBalance = balanceHistory.min()
 maxBalance = balanceHistory.max()
 criticalBalance = np.less(balanceHistory, 0)
+growth = np.diff(balanceHistory) > 0
+growth = np.concatenate(([False], growth, [False]))
+borders = np.diff(growth.astype(int))
+starts = np.where(borders == 1)[0]
+ends = np.where(borders == -1)[0]
+lengths = ends - starts
+indexOfLongest = lengths.argmax()
+startIndex = starts[indexOfLongest]
+endIndex = ends[indexOfLongest]
+indexOfAnomalyies = np.where(transactions.__abs__() > balanceHistory.std() * 3)[0]
 
+# task 4
+signal = np.random.randint(0, 10, size=50000)
+patterns = {}
+windows = np.lib.stride_tricks.sliding_window_view(signal, 5)
+patterns, counts = np.unique(windows, axis=0, return_counts=True)
+
+# task 5
+matrix = np.random.randint(0, 2, size=(200, 50))
+itemPopularity = matrix.sum(axis=0)
+topItems = itemPopularity.argsort()[::-1]
+
+
+def similarity(first: np.ndarray, second: np.ndarray) -> np.float16:
+    return np.linalg.norm(first - second)
+
+
+similarityMatrix = np.zeros((200, 200))
+for i in range(200):
+    for j in range(200):
+        similarityMatrix[i, j] = similarity(matrix[i], matrix[j])
+for targetUser in range(200):
+    similarUsers = similarityMatrix[targetUser].argsort()
+    similarUsers = similarUsers[similarUsers != targetUser][:5]
+    similarItems = matrix[similarUsers].sum(axis=0)
+    userItems = matrix[targetUser]
+    recommendations = similarItems * (1 - userItems)
+    recommendations = np.argsort(recommendations)[::-1][:5]
