@@ -45,7 +45,8 @@ public class myDoubleLinkedList {
     }
 
     public void addAfter(int value, int afterWhich) {
-        if (head == null) return;
+        if (head == null)
+            return;
         Node newValue = new Node(value);
         Node pointer = head;
         if (tail.data == afterWhich) {
@@ -68,7 +69,8 @@ public class myDoubleLinkedList {
     }
 
     public void remove(int value) {
-        if (head == null) return;
+        if (head == null)
+            return;
         Node pointer = head;
 
         while (pointer != null && pointer.data == value) {
@@ -85,7 +87,8 @@ public class myDoubleLinkedList {
             length--;
         }
 
-        if (pointer == null) return;
+        if (pointer == null)
+            return;
 
         for (int i = 0; i < length;) {
             if (pointer.data == value) {
@@ -124,7 +127,8 @@ public class myDoubleLinkedList {
             return;
         }
         Node pointer = head;
-        for (int i = 0; pointer.next != null; i++) {
+        System.out.println("длина " + length);
+        for (int i = 0; pointer != null; i++) {
             if (i == length - 1) {
                 System.out.print(pointer.data);
                 System.out.println();
@@ -133,7 +137,6 @@ public class myDoubleLinkedList {
             }
             pointer = pointer.next;
         }
-        System.out.println(length);
     }
 
     public void displayRev() {
@@ -142,7 +145,7 @@ public class myDoubleLinkedList {
             return;
         }
         Node pointer = tail;
-        for (int i = 0; pointer.prev != null; i++) {
+        for (int i = 0; pointer != null; i++) {
             if (i == length - 1) {
                 System.out.print(pointer.data);
                 System.out.println();
@@ -151,6 +154,5 @@ public class myDoubleLinkedList {
             }
             pointer = pointer.prev;
         }
-        System.out.println(length);
     }
 }
