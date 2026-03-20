@@ -11,7 +11,8 @@ void outputMatrix(const array<array<int, ROWS>, COLS> &, int, int);
 array<array<int, ROWS>, COLS> createMatrix(int, int);
 array<array<int, ROWS>, COLS>
 sumOrDiffOfMatrixes(const array<array<int, ROWS>, COLS> &,
-                    const array<array<int, ROWS>, COLS> &, int, int, char);
+                    const array<array<int, ROWS>, COLS> &, int, int,
+                    int operation = 1);
 array<array<int, ROWS>, COLS>
 matrixByNumber(const array<array<int, ROWS>, COLS> &, int, int, int);
 array<array<int, ROWS>, COLS>
@@ -19,24 +20,18 @@ matrixByMatrix(const array<array<int, ROWS>, COLS> &,
                const array<array<int, ROWS>, COLS> &, int, int, int);
 
 int main() {
-    cout << "Для матрицы A:\n";
-    array<array<int, ROWS>, COLS> A = createMatrix(ROWS, COLS);
-    cout << "Для матрицы B:\n";
-    array<array<int, ROWS>, COLS> B = createMatrix(ROWS, COLS);
+    array<array<int, ROWS>, COLS> A{5, 1, 7, -10, -2, 1, 0, 1, 2};
+    array<array<int, ROWS>, COLS> B{2, 4, 1, 3, 1, 0, 7, 2, 1};
     cout << "Матрица A:\n";
     outputMatrix(A, ROWS, COLS);
     cout << "Матрица B:\n";
     outputMatrix(A, ROWS, COLS);
-    array<array<int, ROWS>, COLS> C = matrixByMatrix(A, A, ROWS, COLS, COLS);
-
-    C = sumOrDiffOfMatrixes(C, B, ROWS, COLS, '+');
-
-    array<array<int, ROWS>, COLS> buff =
-        sumOrDiffOfMatrixes(A, B, ROWS, COLS, '-');
-
-    buff = matrixByNumber(buff, ROWS, COLS, 2);
-
-    C = matrixByMatrix(buff, C, ROWS, COLS, COLS);
+    array<array<int, ROWS>, COLS> C = matrixByMatrix(
+        matrixByNumber(sumOrDiffOfMatrixes(A, B, ROWS, COLS, -1), ROWS, COLS,
+                       2),
+        sumOrDiffOfMatrixes(matrixByMatrix(A, A, ROWS, COLS, COLS), B, ROWS,
+                            COLS),
+        ROWS, COLS, COLS);
     cout << "Матрица C:\n";
     outputMatrix(C, ROWS, COLS);
 
@@ -72,16 +67,16 @@ void outputMatrix(const array<array<int, ROWS>, COLS> &mat, int rows,
 array<array<int, ROWS>, COLS>
 sumOrDiffOfMatrixes(const array<array<int, ROWS>, COLS> &A,
                     const array<array<int, ROWS>, COLS> &B, int rows, int cols,
-                    char operation) {
+                    int operation) {
 
     array<array<int, ROWS>, COLS> result{};
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            if (operation == '+')
-                result[i][j] = A[i][j] + B[i][j];
-            else
-                result[i][j] = A[i][j] - B[i][j];
+            // if (operation == '+')
+            //     result[i][j] = A[i][j] + B[i][j];
+            // else
+            result[i][j] = A[i][j] + operation * B[i][j];
         }
     }
 
