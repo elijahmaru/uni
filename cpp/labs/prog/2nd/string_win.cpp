@@ -15,20 +15,20 @@ int indexOfMax(const vector<int> &);
 int main(int argc, char *argv[]) {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    cout << "Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ â„–1\n";
+    cout << "Çàäàíèå ¹1\n";
     string text;
-    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚ÐµÐºÑÑ‚: ";
+    cout << "Ââåäèòå òåêñò: ";
     getline(cin, text);
     int count = findWord(text);
     if (count != 0) {
-        cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»Ð¾Ð² :" << count << endl;
+        cout << "Êîëè÷åñòâî ñëîâ :" << count << endl;
     } else {
-        cout << "Ð¢Ð°ÐºÐ¸Ñ… ÑÐ»Ð¾Ð² Ð½ÐµÑ‚\n";
+        cout << "Òàêèõ ñëîâ íåò\n";
     }
-    cout << "Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ â„–2\n";
-    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚ÐµÐºÑÑ‚: ";
+    cout << "Çàäàíèå ¹2\n";
+    cout << "Ââåäèòå òåêñò: ";
     getline(cin, text);
-    cout << "Ð‘Ð¾Ð»ÑŒÑˆÐµ Ð²ÑÐµÐ³Ð¾ ÑÐ»Ð¾Ð² Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÑ‚ÑÑ Ð½Ð° " << findMostStartingChar(text)
+    cout << "Áîëüøå âñåãî ñëîâ íà÷èíàåòñÿ íà " << findMostStartingChar(text)
          << endl;
     return 0;
 }
@@ -37,11 +37,11 @@ int findWord(string text) {
     int count = 0;
     size_t i = 0;
     while (i < text.length()) {
-        int startOfTheWord = text.find("Ð¼", i);
+        int startOfTheWord = text.find("ì", i);
         if (startOfTheWord == string::npos) {
             return count;
         }
-        int endOfTheWord = text.find("Ð°", startOfTheWord);
+        int endOfTheWord = text.find("à", startOfTheWord);
         if (endOfTheWord == string::npos) {
             return count;
         }
