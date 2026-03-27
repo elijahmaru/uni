@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -21,9 +22,14 @@ vector<string> banknotes = {fiveThousand, twoThousand, thousand, fiveHundred,
                             five,         two,         one};
 
 vector<string> leastBanknotesNeeded(int);
+void printAnswer(const vector<string> &);
 
 int main(int argc, char *argv[]) {
-    leastBanknotesNeeded(10);
+    int amount;
+    cout << "Введите сумму: ";
+    cin >> amount;
+    vector<string> answer = leastBanknotesNeeded(amount);
+
     return 0;
 }
 
@@ -34,10 +40,21 @@ vector<string> leastBanknotesNeeded(int summ) {
         int value = stoi(
             banknote.substr(banknote.find(" ") + 1)
                 .substr(0, banknote.substr(banknote.find(" ") + 1).find(" ")));
-        cout << value << endl;
-        while (condition) {
-        
+        while (summ % value > 0 && summ / value != 0) {
+            summ %= value;
+            banknotesUsed.push_back(banknote);
         }
     }
     return banknotesUsed;
+}
+
+void printAnswer(const vector<string> &answer) {
+    int howMuch = 0;
+    for (vector<string>::iterator it = banknotes.begin(); it != banknotes.end();
+         ++it) {
+        howMuch = count(answer.begin(), answer.end(), *it);
+        if (howMuch) {
+        
+        }
+    }
 }
