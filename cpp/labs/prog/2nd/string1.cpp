@@ -1,20 +1,17 @@
-#include <cctype>
-#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <windows.h>
 
 // 11
 using namespace std;
+
+vector<string> punctuation = {".", ",", "?", "!", ":", ";"};
 
 int findWord(string);
 string findMostStartingChar(string);
 int indexOfMax(const vector<int> &);
 
 int main(int argc, char *argv[]) {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
     cout << "Задание №1\n";
     string text;
     cout << "Введите текст: ";
@@ -34,28 +31,31 @@ int main(int argc, char *argv[]) {
 }
 
 int findWord(string text) {
-    int count = 0;
+    text = " " + text + " ";
+    int amount = 0;
     size_t i = 0;
-    while (i < text.length()) {
-        int startOfTheWord = text.find("м", i);
-        if (startOfTheWord == string::npos) {
-            return count;
+    for (vector<string>::iterator it = punctuation.begin();
+         it != punctuation.end(); ++it) {
+        while (text.find(*it) != string::npos) {
+            int deleteChar = text.find(*it);
+            text = text.substr(0, deleteChar) + text.substr(deleteChar + 1);
         }
-        int endOfTheWord = text.find("а", startOfTheWord);
-        if (endOfTheWord == string::npos) {
-            return count;
-        }
-        while (endOfTheWord > startOfTheWord &&
-               (text.at(endOfTheWord) == '.' || text.at(endOfTheWord) == ',' ||
-                text.at(endOfTheWord) == '?' || text.at(endOfTheWord) == '!')) {
-            endOfTheWord--;
-        }
-        if (text.substr(startOfTheWord, endOfTheWord - startOfTheWord + 1)
-                .find(" ") == string::npos)
-            count++;
-        i = startOfTheWord + 1;
     }
-    return count;
+    cout << text << endl;
+    while (i < 10) {
+        int startOfTheWord = (text.find(" м", i) < text.find(" М", i))
+                                 ? text.find(" м", i)
+                                 : text.find(" М", i);
+        if (startOfTheWord == string::npos)
+            return amount;
+        int endOfTheWord = text.find("а ", endOfTheWord);
+        if (endOfTheWord == string::npos)
+            return amount;
+        cout << text.substr(startOfTheWord, endOfTheWord - startOfTheWord)
+             << "end" << endl;
+        i = endOfTheWord;
+    }
+    return amount;
 }
 
 int indexOfMax(const vector<int> &vec) {
