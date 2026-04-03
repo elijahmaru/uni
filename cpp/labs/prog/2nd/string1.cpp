@@ -44,12 +44,6 @@ int findWord(string text) {
     if (text.length() == 0) {
         return 0;
     }
-    for (int pos = 0; pos < text.length() && text.at(pos) == ' ';) {
-        text.erase(0, 1);
-    }
-    for (int pos = text.length() - 1; pos >= 0 && text.at(pos) == ' '; pos--) {
-        text.erase(pos, 1);
-    }
     int amount = 0;
     string word;
     stringstream ssText(text);
