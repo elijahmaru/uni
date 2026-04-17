@@ -1,8 +1,8 @@
-public class intArray {
+public class arrayList {
     private int[] data;
     private int len;
 
-    public intArray() {
+    public arrayList() {
         this.data = new int[10];
         this.len = 0;
     }
