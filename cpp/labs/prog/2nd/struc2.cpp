@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
 
-struct str {
+struct st {
     char value;
-    str *next = nullptr;
+    st *next = nullptr;
 
     void init() {
         char inputValue;
-        cout << "Вводите строку по символьно: ";
+        cout << "Введите строку: ";
         cin >> inputValue;
-        str *pointer = this;
+        st *pointer = this;
         while (inputValue != '.') {
             pointer->value = inputValue;
-            pointer->next = new str;
+            pointer->next = new st;
             pointer = pointer->next;
             cin >> inputValue;
         }
@@ -21,7 +21,7 @@ struct str {
     }
 
     void print() {
-        str *point = this;
+        st *point = this;
         while (point != nullptr) {
             cout << point->value;
             point = point->next;
@@ -30,19 +30,12 @@ struct str {
     }
 
     void myErase() {
-        str *lastStartOfTheWord = this;
-        str *pointer = this;
-        while (pointer->value != '.') {
-            if (pointer->value == ' ') {
-                lastStartOfTheWord = pointer->next;
-            }
-            pointer = pointer->next;
-        }
-        pointer = lastStartOfTheWord;
+        st *lastStartOfTheWord = this;
+        st *pointer = this;
         while (pointer != nullptr && pointer->next != nullptr &&
                pointer->next->next != nullptr && pointer->next->value != '.') {
             if (pointer->value == pointer->next->next->value) {
-                str *toDelete = pointer->next;
+                st *toDelete = pointer->next;
                 pointer->next = toDelete->next;
                 delete toDelete;
             } else {
@@ -53,7 +46,7 @@ struct str {
 };
 
 int main(int argc, char *argv[]) {
-    str check;
+    st check;
     check.init();
     check.print();
     check.myErase();
