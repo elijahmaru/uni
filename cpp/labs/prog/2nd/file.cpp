@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -12,27 +13,21 @@ int main(int argc, char *argv[]) {
     }
     string inputString;
     getline(file, inputString);
-    int left = 0;
-    int zCount = 0;
     int maxLen = 0;
-
-    for (int right = 0; right < inputString.size(); right++) {
-        if (inputString[right] == 'Z') {
-            zCount++;
-        }
-        while (zCount > 2) {
-            if (inputString[left] == 'Z') {
-                zCount--;
+    int currentLen = 0;
+    for (char currentChar : inputString) {
+        if (currentChar == 'Z') {
+            if (currentLen > maxLen) {
+                maxLen = currentLen;
             }
-            left++;
-        }
-
-        maxLen = max(maxLen, right - left + 1);
-        if (maxLen < right - left + 1) {
-            maxLen = right - left + 1;
+            currentLen = 0;
+        } else {
+            currentLen++;
         }
     }
-
+    if (maxLen < currentLen) {
+        maxLen = currentLen;
+    }
     cout << "Длина макс последовательности: " << maxLen << endl;
     return 0;
 }
