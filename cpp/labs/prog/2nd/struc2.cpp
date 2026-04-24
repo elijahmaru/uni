@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
 
-struct st {
+struct str {
     char value;
-    st *next = nullptr;
+    str *next = nullptr;
 
     void init() {
         char inputValue;
         cout << "Введите строку: ";
         cin >> inputValue;
-        st *pointer = this;
+        str *pointer = this;
         while (inputValue != '.') {
             pointer->value = inputValue;
-            pointer->next = new st;
+            pointer->next = new str;
             pointer = pointer->next;
             cin >> inputValue;
         }
@@ -21,7 +21,7 @@ struct st {
     }
 
     void print() {
-        st *point = this;
+        str *point = this;
         while (point != nullptr) {
             cout << point->value;
             point = point->next;
@@ -30,12 +30,12 @@ struct st {
     }
 
     void myErase() {
-        st *lastStartOfTheWord = this;
-        st *pointer = this;
+        str *lastStartOfTheWord = this;
+        str *pointer = this;
         while (pointer != nullptr && pointer->next != nullptr &&
                pointer->next->next != nullptr && pointer->next->value != '.') {
             if (pointer->value == pointer->next->next->value) {
-                st *toDelete = pointer->next;
+                str *toDelete = pointer->next;
                 pointer->next = toDelete->next;
                 delete toDelete;
             } else {
@@ -46,7 +46,7 @@ struct st {
 };
 
 int main(int argc, char *argv[]) {
-    st check;
+    str check;
     check.init();
     check.print();
     check.myErase();
