@@ -21,7 +21,7 @@ public class redAndBlackTree {
     }
 
     private Node root;
-    private Node NIL;
+    private final Node NIL;
 
     private void leftRotate(Node middleNode) {
         Node rightSon = middleNode.right;
