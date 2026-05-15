@@ -1,95 +1,133 @@
-/* 4.1 –≤–∞—Ä–∏–∞–Ω—Ç 5
+/* 4.1 ¢†‡®†≠‚ 5
+#include <windows.h>
 #include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 struct route {
     int number;
     string type;
-    string destanation;
+    string destination;
     int timeOfDeparture;
     int timeOfArrival;
 };
 
 vector<route> routes = {
-    {1, "City Bus", "Moscow", 800, 1700},
-    {2, "Mini Bus", "Kazan", 810, 1310},
-    {3, "Express", "Novgorod", 220, 920},
-    {4, "City Bus", "Sochi", 230, 2130},
-    {5, "Mini Bus", "Saint-Petersburg", 440, 2340},
-    {6, "Express", "Moscow", 850, 1450},
-    {7, "City Bus", "Kazan", 660, 2330},
+    {1, "City Bus", "åÆ·™¢†", 800, 1700},
+    {2, "Mini Bus", "ä†ß†≠Ï", 810, 1310},
+    {3, "Express", "çÆ¢£Æ‡Æ§", 220, 920},
+    {4, "City Bus", "ëÆÁ®", 230, 2130},
+    {5, "Mini Bus", "ë†≠™‚-è•‚•‡°„‡£", 440, 2340},
+    {6, "Express", "åÆ·™¢†", 850, 1450},
+    {7, "City Bus", "ä†ß†≠Ï", 660, 2330},
 };
 
-vector<int> getBuses(string, int);
+vector<int> getBuses(string dest, int time);
 
-int main(){
+int main() {
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
+
     int time;
+
     do {
-        cout << "–í–≤–µ–¥–∏—Ç–µ –≤—Ä–µ–º—è: ";
+        cout << "Ç¢•§®‚• ¢‡•¨Ô: ";
         cin >> time;
-    }while (time > 2400);
+    } while (time > 2400);
+
+    cin.ignore();
+
     string dest;
+    cout << "Ç¢•§®‚• Ø„≠™‚ ≠†ß≠†Á•≠®Ô: ";
     getline(cin, dest);
+
+    vector<int> buses = getBuses(dest, time);
+
+    cout << "èÆ§ÂÆ§ÔÈ®• †¢‚Æ°„·Î:\n";
+
+    for (int num : buses) {
+        cout << num << endl;
+    }
+
+    return 0;
 }
 
-vector<int> getBuses(string dest, int time){
+vector<int> getBuses(string dest, int time) {
     vector<int> buses;
+
     for (size_t pos = 0; pos < routes.size(); pos++) {
-        string busDest = routes[pos].destanation;
+        string busDest = routes[pos].destination;
         int timeOfArrival = routes[pos].timeOfArrival;
         int busNumber = routes[pos].number;
+
         if (timeOfArrival <= time && busDest == dest) {
             buses.push_back(busNumber);
         }
     }
+
     return buses;
-}*/
-/* 4.2 –≤–∞—Ä–∏–∞–Ω—Ç 11
+}
+
+ */
+/* 4.2 ¢†‡®†≠‚ 11
+#include <windows.h>
 #include <iostream>
+
 using namespace std;
 
 struct charChain {
     char value;
-    charChain *next = nullptr;
+    charChain* next = nullptr;
 
     void init() {
         char inputValue;
-        cout << "–í–≤–µ–¥–∏—Ç–µ —Å—Ç—Ä–æ–∫—É –∏ –∑–∞–∫–æ–Ω—á–∏—Ç–µ –µ—ë —Ç–æ—á–∫–æ–π: ";
+
+        cout << "Ç¢•§®‚• ·‚‡Æ™„ ® ß†™Æ≠Á®‚• •Ò ‚ÆÁ™Æ©: ";
         cin >> inputValue;
-        charChain *pointer = this;
+
+        charChain* pointer = this;
+
         while (inputValue != '.') {
             pointer->value = inputValue;
             pointer->next = new charChain;
+
             pointer = pointer->next;
+
             cin >> inputValue;
         }
+
         pointer->value = '.';
         pointer->next = nullptr;
     }
 
     void print() {
-        cout << "prep to output\n";
-        charChain *point = this;
+        charChain* point = this;
+
         while (point != nullptr) {
             cout << point->value;
             point = point->next;
         }
+
         cout << endl;
     }
 
     void myErase() {
-        cout << "erase started\n";
-        charChain *lastStartOfTheWord = this;
-        charChain *pointer = this;
-        while (pointer != nullptr && pointer->next != nullptr &&
-               pointer->next->next != nullptr && pointer->next->value != '.') {
-            cout << "erase in progress\n";
+        charChain* pointer = this;
+
+        while (
+            pointer != nullptr &&
+            pointer->next != nullptr &&
+            pointer->next->next != nullptr &&
+            pointer->next->value != '.'
+        ) {
             if (pointer->value == pointer->next->next->value) {
-                charChain *toDelete = pointer->next;
+                charChain* toDelete = pointer->next;
+
                 pointer->next = toDelete->next;
+
                 delete toDelete;
             } else {
                 pointer = pointer->next;
@@ -98,21 +136,33 @@ struct charChain {
     }
 };
 
-int main(int argc, char *argv[]) {
+int main() {
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
+
     charChain check;
+
     check.init();
+
+    cout << "à·ÂÆ§≠†Ô ·‚‡Æ™†:\n";
     check.print();
+
     check.myErase();
+
+    cout << "èÆ·´• „§†´•≠®Ô:\n";
     check.print();
+
     return 0;
-}*/
-/* 4.3 –≤–∞—Ä–∏–∞—Ç 3
+}
+*/
+/* 4.3 ¢†‡®†‚ 3
 #include <csignal>
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
@@ -222,7 +272,6 @@ vector<train> trainsToAfter(const vector<train> arrOfTrains, string destination,
     }
     return result;
 }
-
 vector<train> trainsToWihtEmptySeats(const vector<train> arrOfTrains,
                                      string destination) {
     vector<train> newArrOfTrains = trainsTo(arrOfTrains, destination);
@@ -244,6 +293,8 @@ void showTable(const vector<train> &trains) {
     }
 }
 int main(int argc, char *argv[]) {
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
     vector<train> trains = {train(101, "MOW", 12, 830, 12, 1230, 200, 45),
                             train(102, "MOW", 12, 1400, 12, 1800, 200, 0),
                             train(103, "MOW", 13, 900, 13, 1300, 180, 20),
@@ -262,24 +313,24 @@ int main(int argc, char *argv[]) {
                             train(502, "NVGR", 30, 1600, 30, 2350, 250, 0),
                             train(503, "NVGR", 31, 900, 31, 1700, 250, 70)};
     string destination;
-    cout << "–ò–∑–Ω–∞—á–∞–ª—å–Ω–æ–µ —Ä–∞—Å–ø–∏—Å–∞–Ω–∏–µ\n";
+    cout << "àß≠†Á†´Ï≠Æ• ‡†·Ø®·†≠®•\n";
     showTable(trains);
-    cout << "–í–≤–µ–¥–∏—Ç–µ –Ω–∞–∑–Ω–∞—á–µ–Ω–∏–µ: ";
+    cout << "Ç¢•§®‚• ≠†ß≠†Á•≠®•: ";
     getline(cin, destination);
-    cout << "–†–∞—Å–ø–∏—Å–∞–Ω–∏—è –¥–æ –ø—É–Ω–∫—Ç–∞\n";
+    cout << "ê†·Ø®·†≠®Ô §Æ Ø„≠™‚†\n";
     showTable(trainsTo(trains, destination));
     string userTime;
-    cout << ("–í–≤–µ–¥–∏—Ç–µ –≤—Ä–µ–º—è: ");
+    cout << ("Ç¢•§®‚• ¢‡•¨Ô: ");
     getline(cin, userTime);
     string userDate;
-    cout << ("–í–≤–µ–¥–∏—Ç–µ –¥–µ–Ω—å:  ");
+    cout << ("Ç¢•§®‚• §•≠Ï:  ");
     getline(cin, userDate);
     int date = stoi(userDate);
     int time = stoi(userTime.substr(3, 2)) + stoi(userTime.substr(0, 2)) * 100;
     showTable(trainsToAfter(trains, destination, time, date));
-    cout << "–ü–æ–µ–∑–¥–∞ —Å–æ —Å–≤–æ–±–æ–¥–Ω—ã–º–∏ –º–µ—Å—Ç–∞–º–∏:\n";
+    cout << "èÆ•ß§† ·Æ ·¢Æ°Æ§≠Î¨® ¨•·‚†¨®:\n";
     showTable(trainsToWihtEmptySeats(trains, destination));
     return 0;
 }
 
-}*/
+*/
