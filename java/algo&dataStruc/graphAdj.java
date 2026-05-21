@@ -115,5 +115,4 @@ public class graphAdj {
         }
         return path + "\nВес пути: " + weight;
     }
-
 }
