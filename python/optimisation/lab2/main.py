@@ -167,6 +167,19 @@ def save_plot(vertices: np.ndarray, optimum: tuple[float, float]) -> str:
     axis.fill(points[:, 0], points[:, 1], color="tab:green", alpha=0.25, label="Допустимая область")
     axis.scatter(points[:, 0], points[:, 1], color="tab:green", zorder=3)
     axis.scatter(*optimum, color="red", zorder=4, label="Оптимум (50, 80)")
+    # Вектор коэффициентов целевой функции c = (6, 7).
+    # Увеличен в 5 раз только для наглядности на графике.
+    coefficient_vector = 5 * np.array(PROFIT, dtype=float)
+    axis.quiver(
+        0, 0, coefficient_vector[0], coefficient_vector[1],
+        angles="xy", scale_units="xy", scale=1, color="purple", width=0.006, zorder=5,
+    )
+    axis.text(
+        coefficient_vector[0] + 2,
+        coefficient_vector[1] + 2,
+        r"$\vec{c}=(6,7)$",
+        color="purple",
+    )
     axis.set(xlim=(0, 150), ylim=(0, 185), xlabel=r"$x_1$ — изделия A", ylabel=r"$x_2$ — изделия B")
     axis.grid(True, alpha=0.3)
     axis.legend()
