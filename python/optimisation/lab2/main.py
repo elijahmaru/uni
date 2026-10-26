@@ -13,24 +13,24 @@ def formatNumber(value: float) -> str:
     return str(int(round(value))) if np.isclose(value, round(value)) else f"{value:.2f}"
 
 
-def printTableau(tableau: np.ndarray, basis: list[int], costs: np.ndarray) -> None:
+def printTableau(tableau: np.ndarray, basis: list[int], Cj: np.ndarray) -> None:
     variableNames = ["x1", "x2", "s1", "s2", "s3"]
-    header = ["Базис", "Cb", "b", *variableNames]
+    header = ["Базис", "Cb", *variableNames, "b"]
     rows: list[list[str]] = []
 
     for row, basicVariable in zip(tableau, basis):
         rows.append(
             [
                 variableNames[basicVariable],
-                formatNumber(costs[basicVariable]),
                 formatNumber(row[-1]),
                 *(formatNumber(value) for value in row[:-1]),
+                formatNumber(Cj[basicVariable]),
             ]
         )
 
-    zj = costs[basis] @ tableau[:, :-1]
-    reducedCosts = costs - zj
-    rows.append(["Cj − Zj", "", "", *(formatNumber(value) for value in reducedCosts)])
+    Zj = Cj[basis] @ tableau[:, :-1]
+    delta = Zj - Cj
+    rows.append(["deltaj", "", *(formatNumber(value) for value in delta), ""])
 
     widths = [
         max(len(header[i]), *(len(row[i]) for row in rows)) for i in range(len(header))
@@ -43,7 +43,7 @@ def printTableau(tableau: np.ndarray, basis: list[int], costs: np.ndarray) -> No
 def simplexMethod() -> tuple[float, float, float]:
     numOfVar = 2
     numOfConstraints = len(constraints)
-    costs = np.array([*profit, *([0] * numOfConstraints)], dtype=float)
+    Cj = np.array([*profit, *([0] * numOfConstraints)], dtype=float)
 
     tableau = np.zeros((numOfConstraints, numOfVar + numOfConstraints + 1), dtype=float)
     for rowIndex, (a1, a2, rhs, _) in enumerate(constraints):
@@ -54,14 +54,14 @@ def simplexMethod() -> tuple[float, float, float]:
     basis = [numOfVar + i for i in range(numOfConstraints)]
     print("\n1) СИМПЛЕКС-МЕТОД")
     print("Начальная таблица:")
-    printTableau(tableau, basis, costs)
+    printTableau(tableau, basis, Cj)
 
     iteration = 0
     while True:
-        zj = costs[basis] @ tableau[:, :-1]
-        reducedCosts = costs - zj
-        entering = int(np.argmax(reducedCosts))
-        if reducedCosts[entering] <= 1e-9:
+        Zj = Cj[basis] @ tableau[:, :-1]
+        deltaj =  Zj - Cj
+        entering = int(np.argmin(deltaj))
+        if deltaj[entering] >= -1e-9:
             break
 
         ratios = np.full(numOfConstraints, np.inf)
@@ -83,13 +83,13 @@ def simplexMethod() -> tuple[float, float, float]:
             factor = tableau[i][entering]
             tableau[i] -= factor * tableau[leaving]
         basis[leaving] = entering
-        printTableau(tableau, basis, costs)
+        printTableau(tableau, basis, Cj)
 
     result = np.zeros(numOfVar)
     for row, basicVariable in zip(tableau, basis):
         if basicVariable < numOfVar:
             result[basicVariable] = row[-1]
-    maximum = float(costs[basis] @ tableau[:, -1])
+    maximum = float(Cj[basis] @ tableau[:, -1])
     print(
         f"\nОптимальный план: x1 = {formatNumber(result[0])}, x2 = {formatNumber(result[1])}"
     )
@@ -202,8 +202,10 @@ def savePlot(vertices: np.ndarray, optimum: tuple[float, float]) -> str:
 
 def main() -> None:
     print("Вариант 6. Задание 1")
-    print("max Z = 6x1 + 7x2")
-    print("Ограничения: 4x1 + 5x2 <= 600; 6x1 + 3x2 <= 540; 2x1 <= 120.")
+    print("max Z = 6 * x1 + 7 * x2")
+    print(
+        f"Ограничения: 4 * x1 + 5 * x2 <= 600\n 6 * x1 + 3 * x2 <= 540\n 2 * x1 <= 120."
+    )
 
     simplex_x1, simplex_x2, simplex_value = simplexMethod()
     graph_x1, graph_x2, graph_value, vertices = graphicalMethod()
