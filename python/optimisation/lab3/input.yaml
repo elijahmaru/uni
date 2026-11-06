@@ -1,0 +1,38 @@
+origins: [A1, A2, A3, A4]
+destinations: [B1, B2, B3, B4, B5]
+
+supply:
+  a1: 9
+  a2: 11
+  a3: 14
+  a4: 16
+
+demand:
+  beta1: 8
+  beta2: 9
+  beta3: 13
+  beta4: 8
+  beta5: 12
+
+costs:
+    d11: 5
+    d12: 15
+    d13: 3
+    d14: 6
+    d15: 10
+    d21: 23
+    d22: 8
+    d23: 13
+    d24: 27
+    d25: 12
+    d31: 30
+    d32: 1
+    d33: 5
+    d34: 24
+    d35: 25
+    d41: 8
+    d42: 26
+    d43: 7
+    d44: 28
+    d45: 9
+
